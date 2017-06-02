@@ -29,6 +29,7 @@
 #include "StMuDSTMaker/COMMON/StMuMtdPidTraits.h"
 #include "StMuDSTMaker/COMMON/StMuEmcCollection.h"
 #include "StMuDSTMaker/COMMON/StMuEmcPoint.h"
+#include "StMuDSTMaker/COMMON/StMuFmsHit.h"
 
 #include "StTriggerUtilities/StTriggerSimuMaker.h"
 #include "StTriggerUtilities/Bemc/StBemcTriggerSimu.h"
@@ -1135,6 +1136,34 @@ void StPicoDstMaker::fillMtdHits()
 
 
 /**
+ * Fills the FmsHit TObjArray in StPicoDst with StPicoFmsHit objects by
+ * copying the corresponding data from StMuFmsCollection in StMuDst.
+ */
+void StPicoDstMaker::fillFmsHits()
+{
+  StMuFmsCollection*  muFmsCollection = mMuDst->muFmsCollection();
+  const TClonesArray* muFmsHits = muFmsCollection ? muFmsCollection->getHitArray() : nullptr;
+
+  if (!muFmsHits)
+  {
+    LOG_ERROR << "StMuFmsHits not found in StMuDst\n";
+    return;
+  }
+
+  for (const TObject* obj : *muFmsHits)
+  {
+    const StMuFmsHit& muFmsHit = static_cast<const StMuFmsHit&>(*obj);
+
+    int counter = mPicoArrays[StPicoArrays::FmsHit]->GetEntries();
+
+    new((*(mPicoArrays[StPicoArrays::FmsHit]))[counter]) StPicoFmsHit(muFmsHit.detectorId(),
+                                                                      muFmsHit.channel(),
+                                                                      muFmsHit.adc());
+  }
+}
+
+
+/**
  * Selects a primary vertex from `muDst` vertex collection according to the
  * vertex selection mode `mVtxMode` specified by the user. The mode must be
  * set with StMaker::SetAttr("PicoVtxMode", "your_desired_vtx_mode") as by
@@ -1190,38 +1219,4 @@ bool StPicoDstMaker::selectVertex()
 
   // Retrun false if selected vertex is not valid
   return selectedVertex ? true : false;
-}
-
-void StPicoDstMaker::fillFmsHits()
-{
-  /*
-  StFmsDbMaker* fmsDb=static_cast<StFmsDbMaker*>(GetMaker("fmsDb"));//can save this into a member variable
-  if(!fmsDb){
-    LOG_ERROR<<"fillFmsHits::Failed to get StFmsDbMaker"<<endm;
-    return;
-  }
-  */
-
-  StEvent* event = (StEvent*) GetInputDS("StEvent");
-  if(!event) {
-    LOG_ERROR << "No StEvent found" << endm;
-    return;
-  }
-  StFmsCollection* fmsColl = event->fmsCollection();
-  if(!fmsColl){
-    LOG_ERROR << "No StFmsCollection found" << endm;
-    return;
-  }
-
-
-  //const int nHits=gRandom->Poisson(10);
-  //LOG_INFO<<"Filling FMS hits. nHits= "<<nHits<<endm;
-  const StSPtrVecFmsHit& hits=fmsColl->hits();
-  for(unsigned int i=0;i<fmsColl->numberOfHits();i++) {
-    const int counter = mPicoArrays[StPicoArrays::FmsHit]->GetEntries();
-    //LOG_INFO<<"counter= "<<counter<<endm;
-    new((*(mPicoArrays[StPicoArrays::FmsHit]))[counter]) StPicoFmsHit(hits[i]->detectorId(),
-                                                                      hits[i]->channel(),
-                                                                      hits[i]->adc());
-  }
 }
