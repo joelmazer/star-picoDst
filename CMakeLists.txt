@@ -56,6 +56,7 @@ include_directories(
 	$ENV{STAR}/.$ENV{STAR_HOST_SYS}/include
 	$ENV{STAR}/.$ENV{STAR_HOST_SYS}/include/tables
 	$ENV{STAR}/StRoot
+	$ENV{STAR}
 )
 
 
@@ -86,6 +87,7 @@ root_generate_linkdef_and_dictionary(
 	StPicoEvent/StPicoBEmcPidTraits.h
 	StPicoEvent/StPicoEmcTrigger.h
 	StPicoEvent/StPicoEvent.h
+	StPicoEvent/StPicoFmsHit.h
 	StPicoEvent/StPicoMtdHit.h
 	StPicoEvent/StPicoMtdPidTraits.h
 	StPicoEvent/StPicoMtdTrigger.h
@@ -104,6 +106,7 @@ add_library (
 	StPicoEvent/StPicoCommon.cxx
 	StPicoEvent/StPicoEmcTrigger.cxx
 	StPicoEvent/StPicoEvent.cxx
+	StPicoEvent/StPicoFmsHit.cxx
 	StPicoEvent/StPicoMtdHit.cxx
 	StPicoEvent/StPicoMtdPidTraits.cxx
 	StPicoEvent/StPicoMtdTrigger.cxx
