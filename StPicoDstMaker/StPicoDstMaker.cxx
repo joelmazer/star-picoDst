@@ -30,6 +30,7 @@
 #include "StMuDSTMaker/COMMON/StMuEmcCollection.h"
 #include "StMuDSTMaker/COMMON/StMuEmcPoint.h"
 #include "StMuDSTMaker/COMMON/StMuFmsHit.h"
+#include "StMuDSTMaker/COMMON/StMuFmsUtil.h"
 
 #include "StTriggerUtilities/StTriggerSimuMaker.h"
 #include "StTriggerUtilities/Bemc/StBemcTriggerSimu.h"
@@ -1142,13 +1143,22 @@ void StPicoDstMaker::fillMtdHits()
 void StPicoDstMaker::fillFmsHits()
 {
   StMuFmsCollection*  muFmsCollection = mMuDst->muFmsCollection();
-  const TClonesArray* muFmsHits = muFmsCollection ? muFmsCollection->getHitArray() : nullptr;
+  TClonesArray* muFmsHits = muFmsCollection ? muFmsCollection->getHitArray() : nullptr;
 
   if (!muFmsHits)
   {
     LOG_ERROR << "StMuFmsHits not found in StMuDst\n";
     return;
   }
+
+  StFmsDbMaker* fmsDbMaker = static_cast<StFmsDbMaker*>(GetMaker("fmsDb"));
+
+  if (fmsDbMaker)
+  {
+    muFmsHits->Clear();
+    StMuFmsUtil::recoverMuFmsCollection(*mMuDst, fmsDbMaker);
+  }
+
 
   for (const TObject* obj : *muFmsHits)
   {
