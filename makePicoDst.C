@@ -29,8 +29,8 @@ void makePicoDst(const Char_t *inputFile = "root://xrdstar.rcf.bnl.gov:1095//hom
   gSystem->Load("StTofUtil");
   gSystem->Load("StPmdUtil");
   gSystem->Load("StPreEclMaker");
-  gSystem->Load("StStrangeMuDstMaker");
-  gSystem->Load("StMuDSTMaker");
+  gSystem->Load("libStStrangeMuDstMaker");
+  gSystem->Load("libStMuDSTMaker");
 
   gSystem->Load("StTpcDb");
   gSystem->Load("StMcEvent");
@@ -59,8 +59,8 @@ void makePicoDst(const Char_t *inputFile = "root://xrdstar.rcf.bnl.gov:1095//hom
   gSystem->Load("StMtdCalibMaker");
 
   //FMS
-  gSystem->Load("StFmsHitMaker");
-  gSystem->Load("StFmsDbMaker");
+  gSystem->Load("libStFmsUtil");
+  gSystem->Load("libStFmsDbMaker");
 
   gSystem->Load("libStPicoEvent");
   gSystem->Load("libStPicoDstMaker");
