@@ -59,8 +59,6 @@ void makePicoDst(const Char_t *inputFile = "root://xrdstar.rcf.bnl.gov:1095//hom
   gSystem->Load("StMtdCalibMaker");
 
   //FMS
-  gSystem->Load("StEventMaker");
-  gSystem->Load("StFmsUtil");
   gSystem->Load("StFmsHitMaker");
   gSystem->Load("StFmsDbMaker");
 
@@ -87,8 +85,6 @@ void makePicoDst(const Char_t *inputFile = "root://xrdstar.rcf.bnl.gov:1095//hom
   //Makers needed for FMS
   //TODO:remove dependence on StEvent(Maker)
   StFmsDbMaker* fmsdb = new StFmsDbMaker("fmsDb");  
-  StEventMaker* eventMk = new StEventMaker();
-  StFmsHitMaker* fmshitMk = new StFmsHitMaker();
 
   // Endcap database
   StEEmcDbMaker* eemcDb = new StEEmcDbMaker;
