@@ -15,6 +15,7 @@ class TFile;
 class TTree;
 class StMuDst;
 class StMuTrack;
+class StMuPrimaryVertex;
 class StEmcCollection;
 class StEmcPosition;
 class StEmcGeom;
@@ -118,6 +119,10 @@ protected:
   /// Selects a primary vertex from `muDst` vertex collection according to the
   /// vertex selection mode `mVtxMode` specified by the user.
   bool selectVertex();
+
+  /// Finds a primary vertex in the list of muDst vertices that matches the VPD
+  /// vertex
+  StMuPrimaryVertex* findVpdVertex(const StMuDst& muDst) const;
 
   StMuDst*   mMuDst;
   StEmcCollection* mEmcCollection;
