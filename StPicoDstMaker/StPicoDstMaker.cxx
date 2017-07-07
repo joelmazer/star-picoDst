@@ -203,8 +203,9 @@ Int_t StPicoDstMaker::Init()
         // No input file
         mOutputFileName = GetChainOpt()->GetFileOut();
         mOutputFileName.ReplaceAll(".root", ".picoDst.root");
-      } else {
-
+      }
+      else
+      {
         mInputFileName = mInputFileName(mInputFileName.Index("st_"), mInputFileName.Length());
         mOutputFileName = mInputFileName;
         mOutputFileName.ReplaceAll("MuDst.root", "picoDst.root");
@@ -231,6 +232,7 @@ Int_t StPicoDstMaker::Init()
   return kStOK;
 }
 
+
 int StPicoDstMaker::setVtxModeAttr()
 {
   if (strcmp(SAttr("PicoVtxMode"), "PicoVtxDefault") == 0)
@@ -251,7 +253,6 @@ int StPicoDstMaker::setVtxModeAttr()
     LOG_INFO << " PicoVtxVpdOrDefault is being used " << endm;
     return kStOK;
   }
-
 
   return kStErr;
 }
@@ -655,7 +656,8 @@ void StPicoDstMaker::fillTracks()
     StMuTrack const* const pTrk = index2Primary.find(gTrk->id()) != index2Primary.end() ?
                                   (StMuTrack*)mMuDst->primaryTracks(index2Primary[gTrk->id()]) : nullptr;
 
-        if (gTrk->index2Cov() < 0) continue;
+    if (gTrk->index2Cov() < 0) continue;
+
     StDcaGeometry* dcaG = mMuDst->covGlobTracks(gTrk->index2Cov());
     if (!dcaG)
     {
