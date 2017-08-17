@@ -104,7 +104,7 @@ protected:
   Short_t  mBTofPidTraitsIndex; // index of the BTOF pidTratis in the event
   Short_t  mMtdPidTraitsIndex;  // index of the MTD  pidTratis in the event
 
-  ClassDef(StPicoTrack, 1)
+  ClassDef(StPicoTrack, 2)
 };
 
 inline void StPicoTrack::setBEmcPidTraitsIndex(Int_t index) { mBEmcPidTraitsIndex = (Short_t)index; }

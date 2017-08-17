@@ -177,7 +177,7 @@ protected:
   // Online JP thresholds BEMC only
   UChar_t  mJetPatchThreshold[4];
 
-  ClassDef(StPicoEvent, 1)
+  ClassDef(StPicoEvent, 2)
 };
 
 

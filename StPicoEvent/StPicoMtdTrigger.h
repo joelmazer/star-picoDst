@@ -107,7 +107,7 @@ private:
   ///< 1 - events should have been rejected if only triggered by di-muon
   ///< 2 - events passing filtering cuts
 
-  ClassDef(StPicoMtdTrigger, 1);
+  ClassDef(StPicoMtdTrigger, 2);
 };
 inline UShort_t StPicoMtdTrigger::getVpdTacSum() { return mVpdTacSum; }
 inline UInt_t   StPicoMtdTrigger::getTHUBtime(const Int_t thub) { return mTHUBtime[thub - 1]; }

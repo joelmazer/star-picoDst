@@ -69,7 +69,7 @@ private:
   Float_t   mBeta;                  ///< Beta of matched tracks
   Short_t   mMtdHitChan;            ///< (backleg-1) * 60 + (module-1) * 12 + cell
 
-  ClassDef(StPicoMtdPidTraits, 1)
+  ClassDef(StPicoMtdPidTraits, 2);
 };
 inline Int_t    StPicoMtdPidTraits::trackIndex()        const { return mTrackIndex; }
 inline Int_t    StPicoMtdPidTraits::mtdHitIndex()       const { return mMtdHitIndex; }
