@@ -18,7 +18,7 @@ class StEmcGeom;
 class StEmcRawHit;
 class StPicoDst;
 class StPicoEvent;
-
+class StPicoTrack;
 
 
 class StPicoDstMaker : public StMaker

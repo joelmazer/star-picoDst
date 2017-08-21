@@ -556,8 +556,9 @@ int StPicoDstMaker::Make()
   {
     returnStarCode = MakeWrite();
   }
-  else if (StMaker::m_Mode == PicoIoMode::IoRead)
+  else if (StMaker::m_Mode == PicoIoMode::IoRead) {
     returnStarCode = MakeRead();
+  }
 
   return returnStarCode;
 }
@@ -570,6 +571,7 @@ Int_t StPicoDstMaker::MakeRead()
     return kStWarn;
   }
   mChain->GetEntry(mEventCounter++);
+
   return kStOK;
 }
 //_____________________________________________________________________________
@@ -601,14 +603,13 @@ Int_t StPicoDstMaker::MakeWrite()
 
   mBField = muEvent->magneticField();
 
-
   mEmcCollection = mMuDst->emcCollection();
 
   if (mEmcCollection) 
   {
     // build EmcIndex before ::fillTracks()
     buildEmcIndex();
-    // fill BTOW hits only if ::buildEmcIndex() has been called for this event
+    // fill BTow hits only if ::buildEmcIndex() has been called for this event
     fillBTowHits();
   }
 
@@ -629,6 +630,7 @@ Int_t StPicoDstMaker::MakeWrite()
 
   return kStOK;
 }
+
 //_____________________________________________________________________________
 void StPicoDstMaker::fillTracks()
 {
@@ -664,10 +666,24 @@ void StPicoDstMaker::fillTracks()
       continue;
     }
 
-    int counter = mPicoArrays[StPicoArrays::Track]->GetEntries();
-    new((*(mPicoArrays[StPicoArrays::Track]))[counter]) StPicoTrack(gTrk, pTrk, mBField, mMuDst->primaryVertex()->position(), *dcaG);
+/////
+/*
+    Int_t mCentrality = 0;
+    Int_t flowFlag = 1;
+    Float_t Vz = mMuDst->primaryVertex()->position().z();
+    Int_t iPhi = phiBin(flowFlag, pTrk, Vz);  // FIXME
+    float phi_wgt_read = 1.;
+    if(iPhi>=0) phi_wgt_read = mPhiWeightRead[mCentrality][iPhi];
 
-    StPicoTrack* picoTrk = (StPicoTrack*)mPicoArrays[StPicoArrays::Track]->At(counter);
+//    if(gTrk->index2Cov()<0) continue;
+*/
+
+    // Track -> Tracks Aug17, 2017
+    int counter = mPicoArrays[StPicoArrays::Tracks]->GetEntries();
+    new((*(mPicoArrays[StPicoArrays::Tracks]))[counter]) StPicoTrack(gTrk, pTrk, mBField, mMuDst->primaryVertex()->position(), *dcaG);
+    //new((*(mPicoArrays[StPicoArrays::Tracks]))[counter]) StPicoTrack(gTrk, pTrk, phi_wgt_read, 1, mBField, dcaG);
+
+    StPicoTrack* picoTrk = (StPicoTrack*)mPicoArrays[StPicoArrays::Tracks]->At(counter);
 
     // Fill pid traits
     if (mEmcCollection)

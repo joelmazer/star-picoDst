@@ -8,6 +8,8 @@
 #include "StarClassLibrary/StThreeVectorF.hh"
 #include "StarClassLibrary/SystemOfUnits.h"
 
+////
+#include "StEvent/StDcaGeometry.h"
 
 class StMuTrack;
 class StDcaGeometry;
@@ -60,6 +62,12 @@ public:
 
   /// helix at point of DCA to StPicoEvent::mPrimaryVertex
   StPhysicalHelixD helix(float B) const;
+////
+//  const Float_t* params() const     { return mPar; }
+//  const Float_t* errMatrix() const  { return mErrMatrix; }
+//  StDcaGeometry dcaGeometry() const;
+//  StPhysicalHelixD helix() const;
+/////
   bool hasPxl1Hit() const;
   bool hasPxl2Hit() const;
   bool hasIstHit() const;
@@ -99,6 +107,11 @@ protected:
   Short_t  mNSigmaElectron;   // nsigmaE * 100
   UInt_t   mTopologyMap[2];   // Toplogy Map data0 and data1. See StEvent/StTrackTopologyMap.cxx
 
+/////
+  // a copy of the StMuTrack::dcaGeometry() parameters
+  Float_t  mPar[6];
+  Float_t  mErrMatrix[15];
+/////
   // pidTraits
   Short_t  mBEmcPidTraitsIndex;  // index of the EMC  pidTratis in the event
   Short_t  mBTofPidTraitsIndex; // index of the BTOF pidTratis in the event
@@ -150,7 +163,6 @@ inline bool StPicoTrack::isPrimary() const
 {
   return mPMomentum.magnitude() > 0;
 }
-
 /// Return the global momentum at the dca point to the pVtx (usually it is the primary vertex.   B - magnetic field from PicoEvent::bField()
 inline StThreeVectorF StPicoTrack::gMom(StThreeVectorF const& pVtx, float const B) const
 {
@@ -163,4 +175,24 @@ inline StPhysicalHelixD StPicoTrack::helix(float const B) const
   return StPhysicalHelixD(mGMomentum, mOrigin, B * kilogauss, static_cast<float>(charge()));
 }
 
+/*
+//////
+inline StDcaGeometry StPicoTrack::dcaGeometry() const
+{
+  StDcaGeometry a;
+  a.set(mPar, mErrMatrix);
+  return a;
+}
+inline StPhysicalHelixD StPicoTrack::helix() const
+{
+  return dcaGeometry().helix();
+}
+/// Return the global momentum at the dca point to the pVtx (usually it is the primary vertex.   B - magnetic field from PicoEvent::bField()
+inline StThreeVectorF StPicoTrack::gMom(StThreeVectorF const& pVtx, float B) const
+{
+  StPhysicalHelixD gHelix = helix();
+  return gHelix.momentumAt(gHelix.pathLength(pVtx), B*kilogauss);
+}
+*/
+////
 #endif

@@ -32,8 +32,9 @@ public:
 
   /// returns pointer to current StPicoEvent (class holding the event wise information)
   static StPicoEvent* event() { return (StPicoEvent*)picoArrays[StPicoArrays::Event]->UncheckedAt(0); }
-  /// return pointer to i-th track
-  static StPicoTrack* track(int i) { return (StPicoTrack*)picoArrays[StPicoArrays::Track]->UncheckedAt(i); }
+  /// return pointer to i-th track    
+  //  Track -> "Tracks" Aug17,2017
+  static StPicoTrack* track(int i) { return (StPicoTrack*)picoArrays[StPicoArrays::Tracks]->UncheckedAt(i); }
   /// return pointer to i-th trigger data
   static StPicoEmcTrigger* emcTrigger(int i) { return (StPicoEmcTrigger*)picoArrays[StPicoArrays::EmcTrigger]->UncheckedAt(i); }
   static StPicoMtdTrigger* mtdTrigger(int i) { return (StPicoMtdTrigger*)picoArrays[StPicoArrays::MtdTrigger]->UncheckedAt(i); }
@@ -52,10 +53,12 @@ public:
   /// return pointer to i-th mtd pidTraits
   static StPicoMtdPidTraits* mtdPidTraits(int i) { return (StPicoMtdPidTraits*)picoArrays[StPicoArrays::MtdPidTraits]->UncheckedAt(i); }
 
-  static unsigned int numberOfTracks() { return picoArrays[StPicoArrays::Track]->GetEntries(); }
+  // Track -> "Tracks"  Aug17,2017
+  // BTOW -> "BTow" Aug18,2017
+  static unsigned int numberOfTracks() { return picoArrays[StPicoArrays::Tracks]->GetEntries(); }
   static unsigned int numberOfEmcTriggers() { return picoArrays[StPicoArrays::EmcTrigger]->GetEntries(); }
   static unsigned int numberOfMtdTriggers() { return picoArrays[StPicoArrays::MtdTrigger]->GetEntries(); }
-  static unsigned int numberOfBTOWHits() { return picoArrays[StPicoArrays::BTowHit]->GetEntries(); }
+  static unsigned int numberOfBTowHits() { return picoArrays[StPicoArrays::BTowHit]->GetEntries(); }
   static unsigned int numberOfBTofHits() { return picoArrays[StPicoArrays::BTofHit]->GetEntries(); }
   static unsigned int numberOfMtdHits() { return picoArrays[StPicoArrays::MtdHit]->GetEntries(); }
   static unsigned int numberOfBEmcPidTraits() { return picoArrays[StPicoArrays::BEmcPidTraits] ->GetEntries(); }
@@ -65,7 +68,7 @@ public:
   void print() const; ///< Print basic event info
   static void printTracks();
   static void printTriggers();
-  static void printBTOWHits();
+  static void printBTowHits();
   static void printBTofHits();
   static void printMtdHits();
   static void printBEmcPidTraits();
