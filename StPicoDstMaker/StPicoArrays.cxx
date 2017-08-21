@@ -1,11 +1,13 @@
 #include "StPicoDstMaker/StPicoArrays.h"
 
 //              ARRAY NAMES
+//              Track should be "Tracks"  Aug17,2017
+//              BTOWHit -> BTowHit Aug18,2017
 //============================================================================================
-const char* StPicoArrays::picoArrayNames [NAllPicoArrays] = {"Event", "Track", "EmcTrigger", "MtdTrigger",
-                                                             "BTOWHit", "BTofHit", "MtdHit",
+const char* StPicoArrays::picoArrayNames [NAllPicoArrays] = {"Event", "Tracks", "EmcTrigger", "MtdTrigger",
+                                                             "BTowHit", "BTofHit", "MtdHit",
                                                              "BbcTile", "EpdTile",
-                                                             "EmcPidTraits", "BTofPidTraits", "MtdPidTraits"
+                                                             "BEmcPidTraits", "BTofPidTraits", "MtdPidTraits"
                                                             };
 
 //              ARRAY TYPES

@@ -20,7 +20,8 @@ public:
 /// maximum sizes of the TClonesArrays
   static int           picoArraySizes[NAllPicoArrays];
 
-  enum TypeIndex {Event=0, Track, EmcTrigger, MtdTrigger,
+  // Track should be "Tracks" Aug17,2017
+  enum TypeIndex {Event=0, Tracks, EmcTrigger, MtdTrigger,
                   BTowHit, BTofHit, MtdHit, BbcTile, EpdTile,
                   BEmcPidTraits, BTofPidTraits, MtdPidTraits};
 

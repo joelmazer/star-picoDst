@@ -75,16 +75,16 @@ void StPicoDst::printTriggers()
   LOG_INFO << endm;
 }
 //-----------------------------------------------------------------------
-void StPicoDst::printBTOWHits()
+void StPicoDst::printBTowHits()
 {
-  if (numberOfBTOWHits() == 0)
+  if (numberOfBTowHits() == 0)
   {
-    LOG_INFO << "No BTOWHit found!" << endm;
+    LOG_INFO << "No BTowHit found!" << endm;
     return;
   }
 
-  LOG_INFO << "\n+++++++++ BTOWHit list ( " << numberOfBTOWHits() << " entries )\n\n";
-  for (UInt_t i_t = 0; i_t < numberOfBTOWHits(); i_t++)
+  LOG_INFO << "\n+++++++++ BTowHit list ( " << numberOfBTowHits() << " entries )\n\n";
+  for (UInt_t i_t = 0; i_t < numberOfBTowHits(); i_t++)
   {
     LOG_INFO << "+++ btowHit " << i_t << "\n";
     btowHit(i_t)->Print();

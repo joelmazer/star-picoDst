@@ -80,6 +80,15 @@ StPicoTrack::StPicoTrack(StMuTrack const* const gTrk, StMuTrack const* const pTr
 
   mTopologyMap[0] = (UInt_t)(gTrk->topologyMap().data(0));
   mTopologyMap[1] = (UInt_t)(gTrk->topologyMap().data(1));
+
+//////
+/*
+         const float* params = dcaG.params();
+         const float* errMatrix = dcaG.errMatrix();
+         for (int i = 0; i < 6; i++) mPar[i] = params[i];
+         for (int i = 0; i < 15; i++) mErrMatrix[i] = errMatrix[i];
+*/
+///////////
 }
 //----------------------------------------------------------------------------------
 void StPicoTrack::Print(Char_t const* option) const
